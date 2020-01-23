@@ -1,26 +1,78 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
-const App: React.FC = () => {
+const weatherArray = [
+  [
+    'Mon',
+    'sun',
+    '50',
+    '49'
+  ],
+  [
+    'Tue',
+    'sun',
+    '50',
+    '49'
+  ],
+  [
+    'Wed',
+    'sun',
+    '50',
+    '49'
+  ],
+  [
+    'Thu',
+    'sun',
+    '50',
+    '49'
+  ],
+  [
+    'Fri',
+    'sun',
+    '50',
+    '49'
+  ],
+  [
+    'Sat',
+    'sun',
+    '50',
+    '49'
+  ],
+  [
+    'Sun',
+    'sun',
+    '50',
+    '49'
+  ]
+];
+
+const Weather: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="weather-container">
+        <div className="weather-holder">
+          <div className="one-day-weather">
+            <div className="day-name">Day name</div>
+            <div className="icon-holder">
+              <div className="clodly-icon"></div>
+            </div>
+            <div className="temperature-holder">
+              <div className="temperature-max">50&#176;</div>
+              <div className="temperature-min">50&#176;</div>
+            </div>
+          </div>
+          <div className="one-day-weather">
+            <div className="day-name">Day name</div>
+            <div className="icon-holder">
+              <div className="snowy-icon"></div>
+            </div>
+            <div className="temperature-holder">
+              <div className="temperature-max">50&#176;</div>
+              <div className="temperature-min">50&#176;</div>
+            </div>
+          </div>
+        </div>
+      </div>
   );
 }
 
-export default App;
+export default Weather;
