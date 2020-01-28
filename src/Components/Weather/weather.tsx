@@ -2,81 +2,47 @@ import React, {useState, useEffect} from 'react';
 import './weather.css';
 import SingleDay from "./SingleDay/singleDay";
 
-const ApiKey = '1ef678cad04af1eefc2495f3c0f97cf0';
-const weatherArray = [
-    [
-        'Mon',
-        'sunny',
-        '50',
-        '45'
-    ],
-    [
-        'Tue',
-        'cloudy',
-        '52',
-        '41'
-    ],
-    [
-        'Wed',
-        'rainy',
-        '37',
-        '34'
-    ],
-    [
-        'Thu',
-        'cloudy',
-        '43',
-        '40'
-    ],
-    [
-        'Fri',
-        'snowy',
-        '234',
-        '32'
-    ],
-    [
-        'Sat',
-        'cloudy',
-        '43',
-        '23'
-    ],
-    [
-        'Sun',
-        'sunny',
-        '43',
-        '34'
-    ]
-];
+interface weatherInterface {
+    content: any
+}
 
-const Weather = () => {
-    const [fiveDaysWeather, setFiveDaysWeather] = useState([]);
-    const [curentDate, setCurentDate] = useState(0);
+const Weather = (props: weatherInterface) => {
+    let count = 0;
+    let maxTemp = 0;
+    let minTemp = 0;
+    let curentDate = 0;
 
-    useEffect(() => {
-        const queryParams = 'q=Chisinau,md&units=metric&APPID=' + ApiKey;
+    const fiveDayContent = props.content.map((item:any, key:number) => {
+        const newDate = new Date(item.dt_txt);
 
-        fetch('https://api.openweathermap.org/data/2.5/forecast?' + queryParams)
-            .then((response:any) => response.json())
-            .then((data:any) => setFiveDaysWeather(data.list))
-    }, [1]);
+        count++;
+        maxTemp += item.main.temp_max;
+        minTemp += item.main.temp_min;
 
+        if (curentDate !== newDate.getDate()) {
+            let getMaxTemp = (maxTemp / count);
+            let getMinTemp = (minTemp / count);
+            maxTemp = 0;
+            minTemp = 0;
+            count = 0;
+
+            curentDate = newDate.getDate();
+            return (
+                <SingleDay date={item.dt_txt}
+                           icon={item.weather[0].icon}
+                           maxTemp={getMaxTemp}
+                           minTemp={getMinTemp}
+                           key={key}
+                />
+            );
+        }
+    });
 
     return (
         <div className="weather-container">
             <div className="weather-holder">
                 {
-                    fiveDaysWeather.map((item:any, key:number) => {
-                        const newDate = new Date(item.dt_txt).getDate();
-                        console.log(curentDate, newDate);
-
-                        if (curentDate !== newDate) {
-                            setCurentDate(newDate);
-
-                            return (
-                                <SingleDay item={item} key={key}/>
-                            );
-                        }
-                    })
+                    fiveDayContent
                 }
             </div>
         </div>
