@@ -17,7 +17,7 @@ const App = () => {
         fetch('https://api.openweathermap.org/data/2.5/forecast?' + queryParams)
             .then((response: any) => response.json())
             .then((data: any) => setFiveDaysWeather(data.list))
-    }, [1]);
+    }, []);
 
     return (
         <Router>

@@ -43,6 +43,7 @@ const Weather = (props: weatherInterface) => {
                 />
             );
         }
+        return null;
     });
 
     return (

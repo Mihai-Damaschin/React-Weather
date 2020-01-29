@@ -27,6 +27,7 @@ const OneDayWeather = (props: oneDayWeatherInterface) => {
                 />
             );
         }
+        return null;
     });
 
     return (
