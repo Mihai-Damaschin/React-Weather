@@ -23,10 +23,10 @@ const App = () => {
       <Router>
         <div>
           <Switch>
-            <Route path="/days">
+            <Route path="/day/:date" children={<OneDayWeather content={fiveDaysWeather} />} />
+            <Route path="/">
               <Weather content={fiveDaysWeather} />
             </Route>
-            <Route path="/day/:date" children={<OneDayWeather content={fiveDaysWeather} />} />
           </Switch>
         </div>
       </Router>

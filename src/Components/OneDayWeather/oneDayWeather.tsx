@@ -3,7 +3,7 @@ import {
     useParams
 } from 'react-router-dom';
 import SingleDay from "../Weather/SingleDay/singleDay";
-import './oneDayWeather.css';
+import './oneDayWeather.scss';
 
 interface oneDayWeatherInterface {
     content: any
@@ -32,7 +32,7 @@ const OneDayWeather = (props: oneDayWeatherInterface) => {
     return (
         <div>
             <div>
-                <a className={'back-btn-link'} href={'/days'}>
+                <a className={'back-btn-link'} href={'/'}>
                     <div className="back-btn">Go back</div>
                 </a>
             </div>
