@@ -13,7 +13,7 @@ const Weather = (props: weatherInterface) => {
     let curentDate = 0;
     let dayIcon: string;
 
-    const fiveDayContent = props.content.map((item:any, key:number) => {
+    const fiveDayContent = props.content.map((item: any, key: number) => {
         const newDate = new Date(item.dt_txt);
         const newCurentDate = newDate.getDate();
 

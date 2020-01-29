@@ -10,9 +10,9 @@ interface oneDayWeatherInterface {
 }
 
 const OneDayWeather = (props: oneDayWeatherInterface) => {
-    const { date }: any = useParams();
+    const {date}: any = useParams();
 
-    const oneDayContent = props.content.map((item:any, key:number) => {
+    const oneDayContent = props.content.map((item: any, key: number) => {
         let newDate = new Date(item.dt_txt);
 
         if (parseInt(date) === newDate.getDate()) {

@@ -42,7 +42,7 @@ const SingleDay = (props: singleDayInterface) => {
 
     return (
         <a href={props.hours ? '#' : '/day/' + curentDate.getDate()} className="one-day-weather">
-            <div className="day-name">{props.hours ? curentDate.getHours()+':00' : dayName}</div>
+            <div className="day-name">{props.hours ? curentDate.getHours() + ':00' : dayName}</div>
             <div className="icon-holder">
                 <div className={'icon'} style={{backgroundImage: 'url(/images/' + props.icon + '.svg)'}}/>
             </div>
