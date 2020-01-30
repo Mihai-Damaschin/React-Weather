@@ -1,51 +1,52 @@
 import React from "react";
 import "./Weather.scss";
 import SingleDay from "../singleDay/SingleDay";
+import ItemInterface, {
+  UnknownJsonInterface
+} from "../interfaces_helper/Interfaces";
 
-interface WeatherInterface {
-  content: any;
-}
-
-const Weather: React.FC<WeatherInterface> = props => {
+const Weather: React.FC<UnknownJsonInterface> = props => {
   let count = 0;
   let maxTemp = 0;
   let minTemp = 0;
   let curentDate = 0;
   let dayIcon: string;
 
-  const fiveDayContent = props.content.map((item: any, key: number) => {
-    const newDate = new Date(item.dt_txt);
-    const newCurentDate = newDate.getDate();
+  const fiveDayContent = props.content.map(
+    (item: ItemInterface, key: number) => {
+      const newDate = new Date(item.dt_txt);
+      const newCurentDate = newDate.getDate();
 
-    count++;
-    maxTemp += item.main.temp_max;
-    minTemp += item.main.temp_min;
+      count++;
+      maxTemp += item.main.temp_max;
+      minTemp += item.main.temp_min;
 
-    // get icon from middle hour of the day
-    if (newDate.getHours() === 12) {
-      dayIcon = item.weather[0].icon;
+      // get icon from middle hour of the day
+      if (newDate.getHours() === 12) {
+        dayIcon = item.weather[0].icon;
+      }
+
+      if (curentDate !== newCurentDate) {
+        let getMaxTemp = maxTemp / count;
+        let getMinTemp = minTemp / count;
+        maxTemp = 0;
+        minTemp = 0;
+        count = 0;
+
+        curentDate = newCurentDate;
+        return (
+          <SingleDay
+            date={item.dt_txt}
+            icon={dayIcon ? dayIcon : item.weather[0].icon}
+            maxTemp={getMaxTemp}
+            minTemp={getMinTemp}
+            key={key}
+          />
+        );
+      }
+      return null;
     }
-
-    if (curentDate !== newCurentDate) {
-      let getMaxTemp = maxTemp / count;
-      let getMinTemp = minTemp / count;
-      maxTemp = 0;
-      minTemp = 0;
-      count = 0;
-
-      curentDate = newCurentDate;
-      return (
-        <SingleDay
-          date={item.dt_txt}
-          icon={dayIcon ? dayIcon : item.weather[0].icon}
-          maxTemp={getMaxTemp}
-          minTemp={getMinTemp}
-          key={key}
-        />
-      );
-    }
-    return null;
-  });
+  );
 
   return (
     <div className="weather-container">
