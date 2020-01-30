@@ -3,21 +3,13 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Weather from "./components/weather/Weather";
 import OneDayWeather from "./components/oneDayWeather/OneDayWeather";
 import Loading from "./components/loading/Loading";
-import { UnknownJsonInterface } from "./components/interfaces_helper/Interfaces";
+import ItemInterface, { UnknownJsonInterface } from "./components/interfaces_helper/Interfaces";
 
 interface FiveDaysWeatherInterface {
   cod: number;
   message: number;
   cnt: number;
-  list: {
-    dt: number;
-    dt_txt: string;
-    main: object;
-    weather: object;
-    wind: object;
-    sys: object;
-    (prevState: never[]): never[];
-  };
+  list: ItemInterface
 }
 
 const App: React.FC = () => {
