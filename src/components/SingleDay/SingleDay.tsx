@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./SingleDay.scss";
-import { increment } from '../store/actions/counter';
-import { useDispatch} from "react-redux";
+import { increment } from "../store/actions/counter";
+import { useDispatch } from "react-redux";
 
 interface SingleDayInterface {
   date: string;

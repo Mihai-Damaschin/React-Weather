@@ -2,9 +2,7 @@ import React from "react";
 import { useParams, Link } from "react-router-dom";
 import SingleDay from "../SingleDay/SingleDay";
 import "./OneDayWeather.scss";
-import ItemInterface, {
-  UnknownJsonInterface
-} from "../interfaces";
+import ItemInterface, { UnknownJsonInterface } from "../interfaces";
 
 interface DateInterface {
   [key: string]: string;

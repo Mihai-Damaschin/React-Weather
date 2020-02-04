@@ -2,10 +2,10 @@ import React from "react";
 import Loader from "react-loader-spinner";
 import "./Loading.scss";
 import { increment } from "../store/actions/counter";
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 
 const Loading: React.FC = props => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   return (
     <div className={"loading-holder"} onClick={() => dispatch(increment())}>
