@@ -1,50 +1,36 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Weather from "./components/weather/Weather";
-import OneDayWeather from "./components/oneDayWeather/OneDayWeather";
-import Loading from "./components/loading/Loading";
-import ItemInterface, { UnknownJsonInterface } from "./components/interfaces_helper/Interfaces";
-
-interface FiveDaysWeatherInterface {
-  cod: number;
-  message: number;
-  cnt: number;
-  list: ItemInterface
-}
+import Weather from "./components/Weather/Weather";
+import OneDayWeather from "./components/OneDayWeather/OneDayWeather";
+import Loading from "./components/Loading/Loading";
+import { useDispatch, useSelector } from "react-redux";
+import { asyncGetData } from "./components/apiRequests/weatherRequest";
 
 const App: React.FC = () => {
-  const [fiveDaysWeather, setFiveDaysWeather] = useState([]);
-  const [wasLoaded, setWasLoaded] = useState();
+  const weatherData = useSelector(
+    (state: { weatherData: any }) => state.weatherData
+  );
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const queryParams =
-      "q=Chisinau,md&units=metric&APPID=" + process.env.REACT_APP_API_KEY;
+    const queryParams = "?q=Chisinau,md&units=metric&APPID=" + process.env.REACT_APP_API_KEY;
+    const apiUri = "https://api.openweathermap.org/data/2.5/forecast" + queryParams;
 
-    function fiveDaysWeatherChange(data: FiveDaysWeatherInterface) {
-      setFiveDaysWeather(data.list);
-    }
-
-    function wasLoadedChange() {
-      setWasLoaded("hide-loader");
-    }
-
-    fetch("https://api.openweathermap.org/data/2.5/forecast?" + queryParams)
-      .then((response: UnknownJsonInterface) => response.json())
-      .then((data: FiveDaysWeatherInterface) => fiveDaysWeatherChange(data))
-      .then(wasLoadedChange);
-  }, []);
+    dispatch(asyncGetData({apiUri, setLoading}));
+  }, [dispatch]);
 
   return (
     <Router>
       <div>
-        <Loading hide={wasLoaded} />
+        {loading ? <Loading /> : null}
         <Switch>
           <Route
             path="/day/:date"
-            children={<OneDayWeather content={fiveDaysWeather} />}
+            children={<OneDayWeather content={weatherData} />}
           />
           <Route path="/">
-            <Weather content={fiveDaysWeather} />
+            <Weather content={weatherData} />
           </Route>
         </Switch>
       </div>

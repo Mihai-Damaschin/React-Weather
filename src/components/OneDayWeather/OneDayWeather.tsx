@@ -1,10 +1,10 @@
 import React from "react";
 import { useParams, Link } from "react-router-dom";
-import SingleDay from "../singleDay/SingleDay";
+import SingleDay from "../SingleDay/SingleDay";
 import "./OneDayWeather.scss";
 import ItemInterface, {
   UnknownJsonInterface
-} from "../interfaces_helper/Interfaces";
+} from "../interfaces";
 
 interface DateInterface {
   [key: string]: string;

@@ -1,11 +1,11 @@
 import React from "react";
 import "./Weather.scss";
-import SingleDay from "../singleDay/SingleDay";
-import ItemInterface, {
-  UnknownJsonInterface
-} from "../interfaces_helper/Interfaces";
+import SingleDay from "../SingleDay/SingleDay";
+import ItemInterface, { UnknownJsonInterface } from "../interfaces";
+import { useSelector } from "react-redux";
 
 const Weather: React.FC<UnknownJsonInterface> = props => {
+  const counter = useSelector((state: { counter: number }) => state.counter);
   let count = 0;
   let maxTemp = 0;
   let minTemp = 0;
@@ -50,6 +50,7 @@ const Weather: React.FC<UnknownJsonInterface> = props => {
 
   return (
     <div className="weather-container">
+      {counter}
       <div className="weather-holder">{fiveDayContent}</div>
     </div>
   );

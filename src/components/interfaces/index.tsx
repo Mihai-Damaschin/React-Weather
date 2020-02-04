@@ -18,3 +18,11 @@ export default interface ItemInterface {
 export interface UnknownJsonInterface {
   [key: string]: any;
 }
+
+export interface FiveDaysWeatherInterface {
+  cod: number;
+  message: number;
+  cnt: number;
+  list: ItemInterface;
+  (prevState: never[]): never[];
+}
