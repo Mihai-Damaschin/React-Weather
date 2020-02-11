@@ -1,6 +1,8 @@
+import { UnknownJsonInterface} from "../../interfaces";
+
 interface WeatherDataInterface {
   type: string;
-  payload: any;
+  payload: UnknownJsonInterface
 }
 
 export default function weatherData(

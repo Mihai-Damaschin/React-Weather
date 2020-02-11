@@ -1,8 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./SingleDay.scss";
-import { increment } from "../store/actions/counter";
-import { useDispatch } from "react-redux";
 
 interface SingleDayInterface {
   date: string;
@@ -13,7 +11,6 @@ interface SingleDayInterface {
 }
 
 const SingleDay: React.FC<SingleDayInterface> = props => {
-  const dispatch = useDispatch();
   const curentDate = new Date(props.date);
   let dayName;
 
@@ -48,7 +45,6 @@ const SingleDay: React.FC<SingleDayInterface> = props => {
     <Link
       to={props.hours ? "#" : "/day/" + curentDate.getDate()}
       className="one-day-weather"
-      onClick={() => dispatch(increment())}
     >
       <div className="day-name">
         {props.hours ? curentDate.getHours() + ":00" : dayName}

@@ -1,10 +1,10 @@
 import { combineReducers } from "redux";
-import Counter from "./counter";
 import weatherData from "./weatherData";
+import dataLoading from "./dataLoading";
 
 const allReducers = combineReducers({
-  counter: Counter,
-  weatherData: weatherData
+  weatherData: weatherData,
+  dataLoading: dataLoading
 });
 
 export default allReducers;
